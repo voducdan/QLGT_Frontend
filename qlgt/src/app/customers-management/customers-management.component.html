@@ -1,3 +1,4 @@
+
 <div class="customer-dashboard">
     <div class="table-wrapper">
         <div class="table-title">
@@ -12,120 +13,57 @@
                         <i class="fa fa-search"></i>
                     </form>
                 </div>
+                <div></div>
                 <!--Search box custumers-->
                 <div class="col-sm-4">
                     <a href="#deleteEmployeeModal" class="btn btn-danger add-remove-button" data-toggle="modal"><i class="material-icons">&#xE15C;</i>
                         <span>Delete</span></a>
-                    <a href="#addEmployeeModal" class="btn btn-success add-remove-button" data-toggle="modal"><i class="material-icons">&#xE147;</i>
-                        <span>Add
-                            New Employee</span></a>
+                    <a href="#addEmployeeModal" class="btn btn-success add-remove-button" (click)="successAction.success = false; isAdded = false" data-toggle="modal"><i class="material-icons">&#xE147;</i>
+                        <span>Add New Employee</span></a>
                 </div>
             
             </div>
         </div>
+        <div style="overflow: scroll;">
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>
-
                     </th>
                     <th>CMND</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Address</th>
                     <th>Phone</th>
+                    <th>Giới tính</th>
+                    <th>Quốc tịch</th>
+                    <th>Hoạt động</th>
+                    <th>Ngày tạo</th>
+                    <th>Ngày cập nhật</th>
+                    <th>Tuổi</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr *ngFor="let customer of custommersInfo.data.data">
                     <td>
                         <span class="custom-checkbox">
                             <input type="checkbox" id="checkbox1" name="options[]" value="1">
                             <label for="checkbox1"></label>
                         </span>
                     </td>
-                    <td>1111111111</td>
-                    <td>Thomas Hardy</td>
-                    <td>thomashardy@mail.com</td>
-                    <td>89 Chiaroscuro Rd, Portland, USA</td>
-                    <td>(171) 555-2222</td>
-                    <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="custom-checkbox">
-                            <input type="checkbox" id="checkbox2" name="options[]" value="1">
-                            <label for="checkbox2"></label>
-                        </span>
-                    </td>
-                    <td>222222222</td>
-                    <td>Dominique Perrier</td>
-                    <td>dominiqueperrier@mail.com</td>
-                    <td>Obere Str. 57, Berlin, Germany</td>
-                    <td>(313) 555-5735</td>
-                    <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="custom-checkbox">
-                            <input type="checkbox" id="checkbox3" name="options[]" value="1">
-                            <label for="checkbox3"></label>
-                        </span>
-                    </td>
-                    <td>333333333</td>
-                    <td>Maria Anders</td>
-                    <td>mariaanders@mail.com</td>
-                    <td>25, rue Lauriston, Paris, France</td>
-                    <td>(503) 555-9931</td>
-                    <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="custom-checkbox">
-                            <input type="checkbox" id="checkbox4" name="options[]" value="1">
-                            <label for="checkbox4"></label>
-                        </span>
-                    </td>
-                    <td>444444444</td>
-                    <td>Fran Wilson</td>
-                    <td>franwilson@mail.com</td>
-                    <td>C/ Araquil, 67, Madrid, Spain</td>
-                    <td>(204) 619-5731</td>
-                    <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="custom-checkbox">
-                            <input type="checkbox" id="checkbox5" name="options[]" value="1">
-                            <label for="checkbox5"></label>
-                        </span>
-                    </td>
-                    <td>55555555</td>
-                    <td>Martin Blank</td>
-                    <td>martinblank@mail.com</td>
-                    <td>Via Monte Bianco 34, Turin, Italy</td>
-                    <td>(480) 631-2097</td>
+                    <td>{{customer.cmnd}}</td>
+                    <td>{{customer.teN_KHACH_HANG}}</td>
+                    <td>{{customer.email}}</td>
+                    <td>{{customer.diA_CHI}}</td>
+                    <td>{{customer.sdt}}</td>
+                    <td>{{customer.gioI_TINH}}</td>
+                    <td>{{customer.hoaT_DONG}}</td>
+                    <td>{{customer.quoC_TICH}}</td>
+                    <td>{{customer.ngaY_TAO}}</td>
+                    <td>{{customer.ngaY_CAP_NHAT}}</td>
+                    <td>{{customer.tuoi}}</td>
+                    
                     <td>
                         <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
                                 data-toggle="tooltip" title="Edit">&#xE254;</i></a>
@@ -136,17 +74,41 @@
             </tbody>
         </table>
 
-
-        <div class="clearfix">
             <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
             <ul class="pagination">
-                <li class="page-item disabled"><a href="#">Previous</a></li>
-                <li class="page-item"><a href="#" class="page-link">1</a></li>
-                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                
+                <li  class="page-item"><a routerLink="/customers"
+                    [queryParams]="{ page: 1}" 
+                    class="page-link"
+                    (click) = "getUsers(1)"><< First</a></li>
+                <li *ngIf="custommersInfo.data.prePage != 0" class="page-item"><a routerLink="/customers"
+                    [queryParams]="{ page: custommersInfo.data.prePage }" 
+                    class="page-link"
+                    (click) = "getUsers(custommersInfo.data.prePage)"
+                    >{{custommersInfo.data.prePage}}
+                </a></li>
+                
+                <li class="page-item active"><a routerLink="/customers"
+                    [queryParams]="{ page: custommersInfo.data.currPage }" 
+                    class="page-link"
+                    (click) = "getUsers(custommersInfo.data.currPage)"
+                    >{{custommersInfo.data.currPage}}
+                </a></li>
+
+                <li *ngIf="custommersInfo.data.nextPage != 0" class="page-item"><a 
+                    routerLink="/customers"
+                    [queryParams]="{ page: custommersInfo.data.nextPage}" 
+                    class="page-link"
+                    (click) = "getUsers(custommersInfo.data.nextPage)" class="page-link">{{custommersInfo.data.nextPage}}</a></li>
+                
+                    <li  class="page-item"><a routerLink="/customers"
+                        [queryParams]="{ page: custommersInfo.data.lastPage }" 
+                        class="page-link"
+                        (click) = "getUsers(custommersInfo.data.lastPage)">Last >></a></li>
+                    <!-- <li class="page-item active"><a href="#" class="page-link">3</a></li>
                 <li class="page-item"><a href="#" class="page-link">4</a></li>
                 <li class="page-item"><a href="#" class="page-link">5</a></li>
-                <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                <li class="page-item"><a href="#" class="page-link">Next</a></li> -->
             </ul>
         </div>
     </div>
@@ -155,34 +117,59 @@
 <div id="addEmployeeModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
                 <div class="modal-header">
                     <h4 class="modal-title">Add Employee</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Names</label>
-                        <input type="text" class="form-control" required>
+                        <label>Tên khách hàng</label>
+                        <input type="text" class="form-control"  [(ngModel)] = "newCustomer.TEN_KHACH_HANG" required>
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" required>
+                        <input type="email" class="form-control" [(ngModel)] = "newCustomer.EMAIL" name ="EMAIL" required>
                     </div>
                     <div class="form-group">
-                        <label>Address</label>
-                        <textarea class="form-control" required></textarea>
+                        <label>Địa chỉ</label>
+                        <textarea class="form-control" [(ngModel)] = "newCustomer.DIA_CHI" name ="DIA_CHI" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Phone</label>
-                        <input type="text" class="form-control" required>
+                        <label>SĐT</label>
+                        <input type="text" class="form-control" [(ngModel)] = "newCustomer.SDT" name="SDT" required>
                     </div>
+                    <div class="form-group">
+                        <label>Tuổi</label>
+                        <input type="text" class="form-control" [(ngModel)] = "newCustomer.TUOI" name="TUOI" required>
+                    </div>
+                    <div class="form-group">
+                        <label>CMND</label>
+                        <input type="text" class="form-control" [(ngModel)] = "newCustomer.CMND" name="CMND" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Giới tính</label>
+                        <input type="text" class="form-control" [(ngModel)] = "newCustomer.GIOI_TINH" name="GIOI_TINH" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Quốc tịch</label>
+                        <input type="text" class="form-control" [(ngModel)] = "newCustomer.QUOC_TICH" name="QUOC_TICH" required>
+                    </div>
+                    
+                </div>
+                <div *ngIf="successAction.success && isAdded" class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <strong> Success!</strong> You have been signed in successfully!
+                </div>
+                <div *ngIf="!successAction.success && isAdded" class="alert alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <strong> Fail!</strong> You fail!
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-success" value="Add">
+                    <input type="button" id="exit" class="btn btn-default close-modal" data-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-success"  value="Add" (click)="addUser(newCustomer)">
                 </div>
-            </form>
         </div>
     </div>
 </div>
@@ -190,7 +177,6 @@
 <div id="editEmployeeModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
                 <div class="modal-header">
                     <h4 class="modal-title">Edit Employee</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -217,7 +203,6 @@
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
                     <input type="submit" class="btn btn-info" value="Save">
                 </div>
-            </form>
         </div>
     </div>
 </div>
@@ -228,7 +213,7 @@
             <form>
                 <div class="modal-header">
                     <h4 class="modal-title">Delete Employee</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <p>Are you sure you want to delete these Records?</p>
