@@ -18,7 +18,7 @@ export class CustomersManagementComponent implements OnInit {
       currPage: {}
     }
   };
-  selectedUserId: any;
+  selectedUser: any = {};
   newCustomer: any = {};
   customerInfoUpdate: any = {};
   successAction: any = {
@@ -52,34 +52,38 @@ export class CustomersManagementComponent implements OnInit {
     })
   }
 
-  updateUser(newCustomer: any) {
-    this.http.put<any>('http://localhost:52060/api/customers/' + this.selectedUserId, this.customerInfoUpdate)
-      .subscribe(data => console.log);
-  }
-
-  autoClose() {
-    if (this.successAction.success) {
-      setTimeout(() => {
-        $('#exit').click();
-      }, 1000);
-    }
+  updateUser(selectedUser: any) {
+    this.http.put<any>('http://localhost:52060/api/customers/', selectedUser)
+      .subscribe(res => {
+        console.log(res);
+        if (res.success)
+          this.showSuccess();
+        else
+          this.showError();
+      }
+      );
   }
 
   showSuccess() {
-    $('#success-dialog').css('display', 'block');
+    $('.alert-success').css('display', 'block');
     setTimeout(() => {
-      $('#exit').click();
-      $('#success-dialog').css('display', 'none');
+      $('.exit').click();
+      $('.alert-success').css('display', 'none');
+      this.getUsers(1);
     }, 1000);
 
   }
 
   showError() {
-    $('#error-dialog').css('display', 'block');
+    $('.alert-danger').css('display', 'block');
   }
 
   resetAlertDialog() {
-    $('#error-dialog').css('display', 'none');
-    $('#success-dialog').css('display', 'none');
+    $('.alert-danger').css('display', 'none');
+    $('.alert-success').css('display', 'none');
+  }
+
+  getSelected(user: any) {
+    this.selectedUser = Object.assign({}, user);
   }
 }
