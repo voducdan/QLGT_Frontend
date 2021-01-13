@@ -18,7 +18,7 @@
                 <div class="col-sm-4">
                     <a href="#deleteEmployeeModal" class="btn btn-danger add-remove-button" data-toggle="modal"><i class="material-icons">&#xE15C;</i>
                         <span>Delete</span></a>
-                    <a href="#addEmployeeModal" class="btn btn-success add-remove-button" (click)="successAction.success = false; isAdded = false" data-toggle="modal"><i class="material-icons">&#xE147;</i>
+                    <a href="#addEmployeeModal" class="btn btn-success add-remove-button" (click)="resetAlertDialog()" data-toggle="modal"><i class="material-icons">&#xE147;</i>
                         <span>Add New Employee</span></a>
                 </div>
             
@@ -156,12 +156,12 @@
                     </div>
                     
                 </div>
-                <div *ngIf="successAction.success && isAdded" class="alert alert-success" role="alert">
+                <div id ="success-dialog" class="alert alert-success" role="alert" style="display: none;">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                     <strong> Success!</strong> You have been signed in successfully!
                 </div>
-                <div *ngIf="!successAction.success && isAdded" class="alert alert-danger" role="alert">
+                <div id ="error-dialog" class="alert alert-danger" role="alert" style ="display: none;">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                     <strong> Fail!</strong> You fail!
