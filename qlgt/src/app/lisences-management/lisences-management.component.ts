@@ -8,7 +8,7 @@ declare var $: any;
   styleUrls: ['./lisences-management.component.css']
 })
 export class LisencesManagementComponent implements OnInit {
-  custommersInfo: any = {
+  lisencesInfo: any = {
     data: {
       data: [],
       prePage: {},
@@ -16,11 +16,15 @@ export class LisencesManagementComponent implements OnInit {
       currPage: {}
     }
   };
-  selectedUser: any = {};
-  newCustomer: any = {};
-  customerInfoUpdate: any = {};
+  selectedLisence: any = {};
+  newLisence: any = {};
+  lisenceInfoUpdate: any = {};
   successAction: any = {
     success: ""
+  };
+
+  lisencesType: any ={
+    data: []
   };
 
   isAdded: Boolean = false;
@@ -30,18 +34,27 @@ export class LisencesManagementComponent implements OnInit {
   ngOnInit(): void {
     // Make the HTTP request:
     this.getUsers(1);
+    this.getLisenceType();
   }
 
   getUsers(pageIndex: number) {
-    this.http.get('http://localhost:52060/api/customers?PageIndex=' + pageIndex).subscribe(users => {
+    this.http.get('http://localhost:52060/api/lisences?pageIndex=' + pageIndex).subscribe(users => {
       // Read the result field from the JSON response.
       console.log(users);
-      this.custommersInfo = users;
+      this.lisencesInfo = users;
     });
   }
 
-  addUser(newCustomer: any) {
-    this.http.post<any>('http://localhost:52060/api/customers/', newCustomer).subscribe(res => {
+  getLisenceType() {
+    this.http.get('http://localhost:52060/api/lisences/lisencetype').subscribe(data => {
+      // Read the result field from the JSON response.
+      console.log(data);
+      this.lisencesType = data;
+    });
+  }
+
+  addLisence(newLisence: any) {
+    this.http.post<any>('http://localhost:52060/api/lisences/', newLisence).subscribe(res => {
       console.log(res);
       if (res.success)
         this.showSuccess();
@@ -51,7 +64,7 @@ export class LisencesManagementComponent implements OnInit {
   }
 
   updateUser(selectedUser: any) {
-    this.http.put<any>('http://localhost:52060/api/customers/', selectedUser)
+    this.http.put<any>('http://localhost:52060/api/lisences/', selectedUser)
       .subscribe(res => {
         console.log(res);
         if (res.success)
@@ -62,18 +75,31 @@ export class LisencesManagementComponent implements OnInit {
       );
   }
 
+  deleteLisence(seletedLisence: number) {
+    this.http.delete('http://localhost:52060/api/lisences/'+seletedLisence)
+      .subscribe((status:any) => {
+        console.log(status);
+        if (status.success)
+        this.showSuccess();
+      else
+        this.showError();
+      });
+  }
+
   showSuccess() {
     $('.alert-success').css('display', 'block');
     setTimeout(() => {
       $('.exit').click();
       $('.alert-success').css('display', 'none');
       this.getUsers(1);
+      this.newLisence = "";
     }, 1000);
 
   }
 
   showError() {
     $('.alert-danger').css('display', 'block');
+    this.newLisence = "";
   }
 
   resetAlertDialog() {
@@ -82,6 +108,6 @@ export class LisencesManagementComponent implements OnInit {
   }
 
   getSelected(user: any) {
-    this.selectedUser = Object.assign({}, user);
+    this.selectedLisence = Object.assign({}, user);
   }
 }

@@ -18,7 +18,7 @@
                 <div class="col-sm-4">
                     <a href="#deleteEmployeeModal" class="btn btn-danger add-remove-button" data-toggle="modal"><i class="material-icons">&#xE15C;</i>
                         <span>Delete</span></a>
-                    <a href="#addEmployeeModal" class="btn btn-success add-remove-button" (click)="resetAlertDialog()" data-toggle="modal"><i class="material-icons">&#xE147;</i>
+                    <a href="#addEmployeeModal" class="btn btn-success add-remove-button" (click)="resetAlertDialog();getLisenceType()" data-toggle="modal"><i class="material-icons">&#xE147;</i>
                         <span>Add New Employee</span></a>
                 </div>
             
@@ -41,29 +41,25 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let customer of custommersInfo.data.data">
+                <tr *ngFor="let lisence of lisencesInfo.data.data">
                     <td>
                         <span class="custom-checkbox">
                             <input type="checkbox" id="checkbox1" name="options[]" value="1">
                             <label for="checkbox1"></label>
                         </span>
                     </td>
-                    <td>{{customer.cmnd}}</td>
-                    <td>{{customer.teN_KHACH_HANG}}</td>
-                    <td>{{customer.email}}</td>
-                    <td>{{customer.diA_CHI}}</td>
-                    <td>{{customer.sdt}}</td>
-                    <td>{{customer.gioI_TINH}}</td>
-                    <td>{{customer.hoaT_DONG}}</td>
-                    <td>{{customer.quoC_TICH}}</td>
-                    <td>{{customer.ngaY_TAO}}</td>
-                    <td>{{customer.ngaY_CAP_NHAT}}</td>
-                    <td>{{customer.tuoi}}</td>
+                    <td>{{lisence.mA_BANG_LAI}}</td>
+                    <td>{{lisence.cmnd}}</td>
+                    <td>{{lisence.teN_KHACH_HANG}}</td>
+                    <td>{{lisence.ngaY_CAP_NCK}}</td>
+                    <td>{{lisence.noI_CAP_NCK}}</td>
+                    <td>{{lisence.thoI_HAN_SU_DUNG}}</td>
+                    <td>{{lisence.teN_LOAI_BANG_LAI}}</td>
                     
                     <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal" (click)="getSelected(customer);resetAlertDialog()"><i class="material-icons"
+                        <a href="#editEmployeeModal" class="edit" data-toggle="modal" (click)="getSelected(lisence);resetAlertDialog()"><i class="material-icons"
                                 data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
+                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal" (click)="getSelected(lisence)"><i class="material-icons"
                                 data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                     </td>
                 </tr>
@@ -73,34 +69,34 @@
             <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
             <ul class="pagination">
                 
-                <li  class="page-item"><a routerLink="/customers"
+                <li  class="page-item"><a routerLink="/lisences"
                     [queryParams]="{ page: 1}" 
                     class="page-link"
                     (click) = "getUsers(1)"><< First</a></li>
-                <li *ngIf="custommersInfo.data.prePage != 0" class="page-item"><a routerLink="/customers"
-                    [queryParams]="{ page: custommersInfo.data.prePage }" 
+                <li *ngIf="lisencesInfo.data.prePage != 0" class="page-item"><a routerLink="/lisences"
+                    [queryParams]="{ page: lisencesInfo.data.prePage }" 
                     class="page-link"
-                    (click) = "getUsers(custommersInfo.data.prePage)"
-                    >{{custommersInfo.data.prePage}}
+                    (click) = "getUsers(lisencesInfo.data.prePage)"
+                    >{{lisencesInfo.data.prePage}}
                 </a></li>
                 
-                <li class="page-item active"><a routerLink="/customers"
-                    [queryParams]="{ page: custommersInfo.data.currPage }" 
+                <li class="page-item active"><a routerLink="/lisences"
+                    [queryParams]="{ page: lisencesInfo.data.currPage }" 
                     class="page-link"
-                    (click) = "getUsers(custommersInfo.data.currPage)"
-                    >{{custommersInfo.data.currPage}}
+                    (click) = "getUsers(lisencesInfo.data.currPage)"
+                    >{{lisencesInfo.data.currPage}}
                 </a></li>
 
-                <li *ngIf="custommersInfo.data.nextPage != 0" class="page-item"><a 
-                    routerLink="/customers"
-                    [queryParams]="{ page: custommersInfo.data.nextPage}" 
+                <li *ngIf="lisencesInfo.data.nextPage != 0" class="page-item"><a 
+                    routerLink="/lisences"
+                    [queryParams]="{ page: lisencesInfo.data.nextPage}" 
                     class="page-link"
-                    (click) = "getUsers(custommersInfo.data.nextPage)" class="page-link">{{custommersInfo.data.nextPage}}</a></li>
+                    (click) = "getUsers(lisencesInfo.data.nextPage)" class="page-link">{{lisencesInfo.data.nextPage}}</a></li>
                 
-                    <li  class="page-item"><a routerLink="/customers"
-                        [queryParams]="{ page: custommersInfo.data.lastPage }" 
+                    <li  class="page-item"><a routerLink="/lisences"
+                        [queryParams]="{ page: lisencesInfo.data.lastPage }" 
                         class="page-link"
-                        (click) = "getUsers(custommersInfo.data.lastPage)">Last >></a></li>
+                        (click) = "getUsers(lisencesInfo.data.lastPage)">Last >></a></li>
                     <!-- <li class="page-item active"><a href="#" class="page-link">3</a></li>
                 <li class="page-item"><a href="#" class="page-link">4</a></li>
                 <li class="page-item"><a href="#" class="page-link">5</a></li>
@@ -109,48 +105,34 @@
         </div>
     </div>
 </div>
-<!-- Edit Modal HTML -->
+<!-- Add Modal HTML -->
 <div id="addEmployeeModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Employee</h4>
+                    <h4 class="modal-title">Add Lisence</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Tên khách hàng</label>
-                        <input type="text" class="form-control"  [(ngModel)] = "newCustomer.TEN_KHACH_HANG" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" [(ngModel)] = "newCustomer.EMAIL" name ="EMAIL" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Địa chỉ</label>
-                        <textarea class="form-control" [(ngModel)] = "newCustomer.DIA_CHI" name ="DIA_CHI" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>SĐT</label>
-                        <input type="text" class="form-control" [(ngModel)] = "newCustomer.SDT" name="SDT" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Tuổi</label>
-                        <input type="text" class="form-control" [(ngModel)] = "newCustomer.TUOI" name="TUOI" required>
-                    </div>
-                    <div class="form-group">
                         <label>CMND</label>
-                        <input type="text" class="form-control" [(ngModel)] = "newCustomer.CMND" name="CMND" required>
+                        <input type="text" class="form-control"  [(ngModel)] = "newLisence.cmnd" required>
                     </div>
                     <div class="form-group">
-                        <label>Giới tính</label>
-                        <input type="text" class="form-control" [(ngModel)] = "newCustomer.GIOI_TINH" name="GIOI_TINH" required>
+                        <label>MA_LOAI_BANG_LAI</label>
+                        <select class="form-control" [(ngModel)] = "newLisence.MA_LOAI_BANG_LAI" name ="MA_LOAI_BANG_LAI">
+                            <option *ngFor="let ltype of lisencesType.data" value="{{ltype.mA_LOAI_BANG_LAI}}">{{ltype.teN_LOAI_BANG_LAI}}</option>
+                        </select>
+
                     </div>
                     <div class="form-group">
-                        <label>Quốc tịch</label>
-                        <input type="text" class="form-control" [(ngModel)] = "newCustomer.QUOC_TICH" name="QUOC_TICH" required>
+                        <label>NOI_CAP_NCK</label>
+                        <textarea class="form-control" [(ngModel)] = "newLisence.NOI_CAP_NCK" name ="DIA_CHI" required></textarea>
                     </div>
-                    
+                    <div class="form-group">
+                        <label>THOI_HAN_SU_DUNG</label>
+                        <input type="text" class="form-control" [(ngModel)] = "newLisence.THOI_HAN_SU_DUNG" name="SDT" required>
+                    </div>
                 </div>
                 <div id ="success-dialog" class="alert alert-success" role="alert" style="display: none;">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
@@ -163,7 +145,8 @@
                     <strong> Fail!</strong> You fail!
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" class="btn btn-success"  value="Add" (click)="addUser(newCustomer)">
+                    <input type="button" class="btn btn-default exit" data-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-success"  value="Add" (click)="addLisence(newLisence)">
                 </div>
         </div>
     </div>
@@ -178,38 +161,36 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Tên khách hàng</label>
-                        <input type="text" class="form-control"  [(ngModel)] = "selectedUser.teN_KHACH_HANG" required>
+                        <label>Mã bằng lái</label>
+                        <input type="text" class="form-control"  [(ngModel)] = "selectedLisence.mA_BANG_LAI" disabled>
                     </div>
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" [(ngModel)] = "selectedUser.email" name ="EMAIL" required>
+                        <label>Loại bằng lái</label>
+                        <select class="form-control" [(ngModel)] = "selectedLisence.mA_LOAI_BANG_LAI" name ="MA_LOAI_BANG_LAI">
+                            <option *ngFor="let ltype of lisencesType.data" value="{{ltype.mA_LOAI_BANG_LAI}}"  [selected]="selectedLisence.mA_LOAI_BANG_LAI == ltype.mA_LOAI_BANG_LAI">{{ltype.teN_LOAI_BANG_LAI}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mã khách hàng</label>
+                        <input type="text" class="form-control" [(ngModel)] = "selectedLisence.mA_KHACH_HANG" name="SDT" disabled>
                     </div>
                     <div class="form-group">
-                        <label>Địa chỉ</label>
-                        <textarea class="form-control" [(ngModel)] = "selectedUser.diA_CHI" name ="DIA_CHI" required></textarea>
+                        <label>Ngày cấp </label>
+                        <input type="text" class="form-control" [(ngModel)] = "selectedLisence.ngaY_CAP_NCK" name="CMND" disabled>
                     </div>
                     <div class="form-group">
-                        <label>SĐT</label>
-                        <input type="text" class="form-control" [(ngModel)] = "selectedUser.sdt" name="SDT" required>
+                        <label>Nơi cấp</label>
+                        <input type="text" class="form-control" [(ngModel)] = "selectedLisence.noI_CAP_NCK" name="GIOI_TINH" required>
                     </div>
                     <div class="form-group">
-                        <label>Tuổi</label>
-                        <input type="text" class="form-control" [(ngModel)] = "selectedUser.tuoi" name="TUOI" required>
+                        <label>Thời hạn sử dụng</label>
+                        <input type="text" class="form-control" [(ngModel)] = "selectedLisence.thoI_HAN_SU_DUNG" name="QUOC_TICH" required>
                     </div>
                     <div class="form-group">
-                        <label>CMND</label>
-                        <input type="text" class="form-control" [(ngModel)] = "selectedUser.cmnd" name="CMND" required>
+                        <label>Hoạt động</label>
+                        <input type="text" class="form-control" [(ngModel)] = "selectedLisence.hoaT_DONG" name="QUOC_TICH" required>
                     </div>
-                    <div class="form-group">
-                        <label>Giới tính</label>
-                        <input type="text" class="form-control" [(ngModel)] = "selectedUser.gioI_TINH" name="GIOI_TINH" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Quốc tịch</label>
-                        <input type="text" class="form-control" [(ngModel)] = "selectedUser.quoC_TICH" name="QUOC_TICH" required>
-                    </div>
-                    
                 </div>
                 <div class="modal-footer">
 
@@ -224,7 +205,7 @@
                         <strong> Fail!</strong> You fail!
                     </div>
                     <input type="button" class="btn btn-default exit" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-info" value="Save" (click)="updateUser(selectedUser)">
+                    <input type="submit" class="btn btn-info" value="Save" (click)="updateUser(selectedLisence)">
                 </div>
         </div>
     </div>
@@ -233,7 +214,6 @@
 <div id="deleteEmployeeModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
                 <div class="modal-header">
                     <h4 class="modal-title">Delete Employee</h4>
                     <button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
@@ -242,11 +222,20 @@
                     <p>Are you sure you want to delete these Records?</p>
                     <p class="text-warning"><small>This action cannot be undone.</small></p>
                 </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-danger" value="Delete">
+                <div id ="success-dialog" class="alert alert-success" role="alert" style="display: none;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <strong> Success!</strong> You have been signed in successfully!
                 </div>
-            </form>
+                <div id ="error-dialog" class="alert alert-danger" role="alert" style ="display: none;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <strong> Fail!</strong> You fail!
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default exit" data-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-danger" value="Delete" (click) ="deleteLisence(selectedLisence.mA_BANG_LAI)" >
+                </div>
         </div>
     </div>
 </div>
