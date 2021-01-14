@@ -16,8 +16,8 @@ export class VehiclesManagementComponent implements OnInit {
       currPage: {}
     }
   };
-  selectedUser: any = {};
-  newCustomer: any = {};
+  selectedVehicle: any = {};
+  newVehicle: any = {};
   vehicleInfoUpdate: any = {};
   successAction: any = {
     success: ""
@@ -40,8 +40,8 @@ export class VehiclesManagementComponent implements OnInit {
     });
   }
 
-  addUser(newCustomer: any) {
-    this.http.post<any>('http://localhost:52060/api/vehicles/', newCustomer).subscribe(res => {
+  addVehicle(newVehicle: any) {
+    this.http.post<any>('http://localhost:52060/api/vehicles/', newVehicle).subscribe(res => {
       console.log(res);
       if (res.success)
         this.showSuccess();
@@ -50,8 +50,8 @@ export class VehiclesManagementComponent implements OnInit {
     })
   }
 
-  updateUser(selectedUser: any) {
-    this.http.put<any>('http://localhost:52060/api/vehicles/', selectedUser)
+  updateVehicle(selectedVehicle: any) {
+    this.http.put<any>('http://localhost:52060/api/vehicles/', selectedVehicle)
       .subscribe(res => {
         console.log(res);
         if (res.success)
@@ -81,7 +81,7 @@ export class VehiclesManagementComponent implements OnInit {
     $('.alert-success').css('display', 'none');
   }
 
-  getSelected(user: any) {
-    this.selectedUser = Object.assign({}, user);
+  getSelected(vehicle: any) {
+    this.selectedVehicle = Object.assign({}, vehicle);
   }
 }
