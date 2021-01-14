@@ -9,6 +9,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { CustomersManagementComponent } from './customers-management/customers-management.component';
 import { HttpClientModule} from '@angular/common/http';
+import { LisencesManagementComponent } from './lisences-management/lisences-management.component';
+import { VehiclesManagementComponent } from './vehicles-management/vehicles-management.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { HttpClientModule} from '@angular/common/http';
     SidebarComponent,
     HeaderComponent,
     FooterComponent,
-    CustomersManagementComponent
+    CustomersManagementComponent,
+    LisencesManagementComponent,
+    VehiclesManagementComponent
   ],
   imports: [
     BrowserModule,

@@ -30,18 +30,14 @@
                 <tr>
                     <th>
                     </th>
+                    <th>Mã bằng lái</th>
                     <th>CMND</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Phone</th>
-                    <th>Giới tính</th>
-                    <th>Hoạt động</th>
-                    <th>Quốc tịch</th>
-                    <th>Ngày tạo</th>
-                    <th>Ngày cập nhật</th>
-                    <th>Tuổi</th>
-                    <th>Actions</th>
+                    <th>Tên khách hàng</th>
+                    <th>Ngày cấp</th>
+                    <th>Nơi cấp</th>
+                    <th>Thời hạn</th>
+                    <th>Tên loại bằng lái</th>
+                   
                 </tr>
             </thead>
             <tbody>
@@ -203,7 +199,7 @@
                     </div>
                     <div class="form-group">
                         <label>CMND</label>
-                        <input type="text" class="form-control" [(ngModel)] = "selectedUser.cmnd" name="CMND" disabled>
+                        <input type="text" class="form-control" [(ngModel)] = "selectedUser.cmnd" name="CMND" required>
                     </div>
                     <div class="form-group">
                         <label>Giới tính</label>

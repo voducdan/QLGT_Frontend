@@ -30,42 +30,48 @@
                 <tr>
                     <th>
                     </th>
-                    <th>CMND</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Phone</th>
-                    <th>Giới tính</th>
-                    <th>Hoạt động</th>
-                    <th>Quốc tịch</th>
-                    <th>Ngày tạo</th>
-                    <th>Ngày cập nhật</th>
-                    <th>Tuổi</th>
-                    <th>Actions</th>
+                    <th>Mã phương tiện</th>
+                    <th>Tên khách hàng</th>
+                    <th>Tên loại phương tiện</th>
+                    <th>Số phương tiện</th>
+                    <th>Số máy</th>
+                    <th>Ngày đăng kí</th>
+                    <th>Màu sơn</th>
+                   <th>Nhãn hiệu</th>
+                   <th>Dung tích</th>
+                   <th>Biển số xe</th>
+                   <th>Ghi chú</th>
+                   <th>Ngày tạo</th>
+                   <th>Ngày cập nhật</th>
+                   <th>Hoạt động</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let customer of custommersInfo.data.data">
+                <tr *ngFor="let vehicle of vehiclesInfo.data.data">
                     <td>
                         <span class="custom-checkbox">
                             <input type="checkbox" id="checkbox1" name="options[]" value="1">
                             <label for="checkbox1"></label>
                         </span>
                     </td>
-                    <td>{{customer.cmnd}}</td>
-                    <td>{{customer.teN_KHACH_HANG}}</td>
-                    <td>{{customer.email}}</td>
-                    <td>{{customer.diA_CHI}}</td>
-                    <td>{{customer.sdt}}</td>
-                    <td>{{customer.gioI_TINH}}</td>
-                    <td>{{customer.hoaT_DONG}}</td>
-                    <td>{{customer.quoC_TICH}}</td>
-                    <td>{{customer.ngaY_TAO}}</td>
-                    <td>{{customer.ngaY_CAP_NHAT}}</td>
-                    <td>{{customer.tuoi}}</td>
+                    <td>{{vehicle.mA_PHUONG_TIEN}}</td>
+                    <td>{{vehicle.teN_KHACH_HANG}}</td>
+                    <td>{{vehicle.teN_LOAI_PHUONG_TIEN}}</td>
+                    <td>{{vehicle.sO_PHUONG_TIEN}}</td>
+                    <td>{{vehicle.sO_MAY}}</td>
+                    <td>{{vehicle.ngaY_DANG_KY}}</td>
+                    <td>{{vehicle.maU_SON}}</td>
+                    <td>{{vehicle.nhaN_HIEU}}</td>
+                    <td>{{vehicle.dunG_TICH}}</td>
+                    <td>{{vehicle.bieN_SO_XE}}</td>
+                    <td>{{vehicle.ghI_CHU}}</td>
+                    <td>{{vehicle.ngaY_TAO}}</td>
+                    <td>{{vehicle.ngaY_CAP_NHAT}}</td>
+                    <td>{{vehicle.hoaT_DONG}}</td>
+
                     
                     <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal" (click)="getSelected(customer);resetAlertDialog()"><i class="material-icons"
+                        <a href="#editEmployeeModal" class="edit" data-toggle="modal" (click)="getSelected(vehicle);resetAlertDialog()"><i class="material-icons"
                                 data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                         <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
                                 data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -77,34 +83,34 @@
             <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
             <ul class="pagination">
                 
-                <li  class="page-item"><a routerLink="/customers"
+                <li  class="page-item"><a routerLink="/vehicles"
                     [queryParams]="{ page: 1}" 
                     class="page-link"
-                    (click) = "getUsers(1)"><< First</a></li>
-                <li *ngIf="custommersInfo.data.prePage != 0" class="page-item"><a routerLink="/customers"
-                    [queryParams]="{ page: custommersInfo.data.prePage }" 
+                    (click) = "getVehicles(1)"><< First</a></li>
+                <li *ngIf="vehiclesInfo.data.prePage != 0" class="page-item"><a routerLink="/vehicles"
+                    [queryParams]="{ page: vehiclesInfo.data.prePage }" 
                     class="page-link"
-                    (click) = "getUsers(custommersInfo.data.prePage)"
-                    >{{custommersInfo.data.prePage}}
+                    (click) = "getVehicles(vehiclesInfo.data.prePage)"
+                    >{{vehiclesInfo.data.prePage}}
                 </a></li>
                 
-                <li class="page-item active"><a routerLink="/customers"
-                    [queryParams]="{ page: custommersInfo.data.currPage }" 
+                <li class="page-item active"><a routerLink="/vehicles"
+                    [queryParams]="{ page: vehiclesInfo.data.currPage }" 
                     class="page-link"
-                    (click) = "getUsers(custommersInfo.data.currPage)"
-                    >{{custommersInfo.data.currPage}}
+                    (click) = "getVehicles(vehiclesInfo.data.currPage)"
+                    >{{vehiclesInfo.data.currPage}}
                 </a></li>
 
-                <li *ngIf="custommersInfo.data.nextPage != 0" class="page-item"><a 
-                    routerLink="/customers"
-                    [queryParams]="{ page: custommersInfo.data.nextPage}" 
+                <li *ngIf="vehiclesInfo.data.nextPage != 0" class="page-item"><a 
+                    routerLink="/vehicles"
+                    [queryParams]="{ page: vehiclesInfo.data.nextPage}" 
                     class="page-link"
-                    (click) = "getUsers(custommersInfo.data.nextPage)" class="page-link">{{custommersInfo.data.nextPage}}</a></li>
+                    (click) = "getVehicles(vehiclesInfo.data.nextPage)" class="page-link">{{vehiclesInfo.data.nextPage}}</a></li>
                 
-                    <li  class="page-item"><a routerLink="/customers"
-                        [queryParams]="{ page: custommersInfo.data.lastPage }" 
+                    <li  class="page-item"><a routerLink="/vehicles"
+                        [queryParams]="{ page: vehiclesInfo.data.lastPage }" 
                         class="page-link"
-                        (click) = "getUsers(custommersInfo.data.lastPage)">Last >></a></li>
+                        (click) = "getVehicles(vehiclesInfo.data.lastPage)">Last >></a></li>
                     <!-- <li class="page-item active"><a href="#" class="page-link">3</a></li>
                 <li class="page-item"><a href="#" class="page-link">4</a></li>
                 <li class="page-item"><a href="#" class="page-link">5</a></li>
@@ -203,7 +209,7 @@
                     </div>
                     <div class="form-group">
                         <label>CMND</label>
-                        <input type="text" class="form-control" [(ngModel)] = "selectedUser.cmnd" name="CMND" disabled>
+                        <input type="text" class="form-control" [(ngModel)] = "selectedUser.cmnd" name="CMND" required>
                     </div>
                     <div class="form-group">
                         <label>Giới tính</label>
