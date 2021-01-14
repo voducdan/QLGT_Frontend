@@ -32,6 +32,7 @@
                     </th>
                     <th>Mã phương tiện</th>
                     <th>Tên khách hàng</th>
+                    <th>CMND</th>
                     <th>Tên loại phương tiện</th>
                     <th>Số phương tiện</th>
                     <th>Số máy</th>
@@ -56,6 +57,7 @@
                     </td>
                     <td>{{vehicle.mA_PHUONG_TIEN}}</td>
                     <td>{{vehicle.teN_KHACH_HANG}}</td>
+                    <td>{{vehicle.cmnd}}</td>
                     <td>{{vehicle.teN_LOAI_PHUONG_TIEN}}</td>
                     <td>{{vehicle.sO_PHUONG_TIEN}}</td>
                     <td>{{vehicle.sO_MAY}}</td>
@@ -73,7 +75,7 @@
                     <td>
                         <a href="#editEmployeeModal" class="edit" data-toggle="modal" (click)="getSelected(vehicle);resetAlertDialog()"><i class="material-icons"
                                 data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
+                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal" (click)="getSelected(vehicle)"><i class="material-icons"
                                 data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                     </td>
                 </tr>
@@ -134,7 +136,9 @@
                     </div>
                     <div class="form-group">
                         <label>Mã loại phương tiện</label>
-                        <input type="email" class="form-control" [(ngModel)] = "newVehicle.MA_LOAI_PHUONG_TIEN" name ="EMAIL" required>
+                        <select class="form-control" [(ngModel)] = "newVehicle.MA_LOAI_PHUONG_TIEN" name ="MA_LOAI_BANG_LAI">
+                            <option *ngFor="let ltype of vehiclesType.data" value="{{ltype.mA_LOAI_PHUONG_TIEN}}">{{ltype.teN_LOAI_PHUONG_TIEN}}</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Số phương tiện</label>
@@ -177,6 +181,7 @@
                     <strong> Fail!</strong> You fail!
                 </div>
                 <div class="modal-footer">
+                    <input type="button" class="btn btn-default exit" data-dismiss="modal" value="Cancel">
                     <input type="submit" class="btn btn-success"  value="Add" (click)="addVehicle(newVehicle)">
                 </div>
         </div>
@@ -192,38 +197,41 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Tên khách hàng</label>
-                        <input type="text" class="form-control"  [(ngModel)] = "selectedVehicle.teN_KHACH_HANG" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" [(ngModel)] = "selectedVehicle.email" name ="EMAIL" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Địa chỉ</label>
-                        <textarea class="form-control" [(ngModel)] = "selectedVehicle.diA_CHI" name ="DIA_CHI" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>SĐT</label>
-                        <input type="text" class="form-control" [(ngModel)] = "selectedVehicle.sdt" name="SDT" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Tuổi</label>
-                        <input type="text" class="form-control" [(ngModel)] = "selectedVehicle.tuoi" name="TUOI" required>
-                    </div>
-                    <div class="form-group">
                         <label>CMND</label>
-                        <input type="text" class="form-control" [(ngModel)] = "selectedVehicle.cmnd" name="CMND" required>
+                        <input type="text" class="form-control"  [(ngModel)] = "selectedVehicle.cmnd" disabled>
                     </div>
                     <div class="form-group">
-                        <label>Giới tính</label>
-                        <input type="text" class="form-control" [(ngModel)] = "selectedVehicle.gioI_TINH" name="GIOI_TINH" required>
+                        <label>Loại phương tiện</label>
+                        <input type="email" class="form-control" [(ngModel)] = "selectedVehicle.mA_LOAI_PHUONG_TIEN" name ="EMAIL" required>
                     </div>
                     <div class="form-group">
-                        <label>Quốc tịch</label>
-                        <input type="text" class="form-control" [(ngModel)] = "selectedVehicle.quoC_TICH" name="QUOC_TICH" required>
+                        <label>Số phương tiện</label>
+                        <textarea class="form-control" [(ngModel)] = "selectedVehicle.sO_PHUONG_TIEN" name ="DIA_CHI" required></textarea>
                     </div>
-                    
+                    <div class="form-group">
+                        <label>Số máy</label>
+                        <input type="text" class="form-control" [(ngModel)] = "selectedVehicle.sO_MAY" name="SDT" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Màu sơn</label>
+                        <input type="text" class="form-control" [(ngModel)] = "selectedVehicle.maU_SON" name="TUOI" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nhãn hiệu</label>
+                        <input type="text" class="form-control" [(ngModel)] = "selectedVehicle.nhaN_HIEU" name="CMND" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Dung tích</label>
+                        <input type="text" class="form-control" [(ngModel)] = "selectedVehicle.dunG_TICH" name="GIOI_TINH" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Biển số xe</label>
+                        <input type="text" class="form-control" [(ngModel)] = "selectedVehicle.bieN_SO_XE" name="QUOC_TICH" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Ghi chú</label>
+                        <input type="text" class="form-control" [(ngModel)] = "selectedVehicle.gHi_CHU" name="QUOC_TICH" required>
+                    </div>
                 </div>
                 <div class="modal-footer">
 
@@ -258,7 +266,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-danger" value="Delete">
+                    <input type="submit" class="btn btn-danger" value="Delete" (click) ="deleteVehicle(selectedVehicle.mA_PHUONG_TIEN)">
                 </div>
             </form>
         </div>

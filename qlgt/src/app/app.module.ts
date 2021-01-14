@@ -11,6 +11,7 @@ import { CustomersManagementComponent } from './customers-management/customers-m
 import { HttpClientModule} from '@angular/common/http';
 import { LisencesManagementComponent } from './lisences-management/lisences-management.component';
 import { VehiclesManagementComponent } from './vehicles-management/vehicles-management.component';
+import { ReportsManagementComponent } from './reports-management/reports-management.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { VehiclesManagementComponent } from './vehicles-management/vehicles-mana
     FooterComponent,
     CustomersManagementComponent,
     LisencesManagementComponent,
-    VehiclesManagementComponent
+    VehiclesManagementComponent,
+    ReportsManagementComponent
   ],
   imports: [
     BrowserModule,
