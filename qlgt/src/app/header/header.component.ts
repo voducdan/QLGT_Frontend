@@ -13,14 +13,24 @@ import {
 export class HeaderComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
-  user: any
-  ngOnInit(): void {
+  user: string = ''
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-type': 'application/json' }),
 
+  };
+  ngOnInit(): void {
+    this.getUserInfo().subscribe(res => {
+      this.user = res.userName
+    })
   }
   getUserInfo(): Observable<any> {
-
+    const token: string = localStorage.getItem('token') || ''
     return this.http
-      .post("http://localhost:52060/api/auth/login", this.httpOptions)
+      .get("http://localhost:52060/api/auth/generator", {
+        headers: {
+          authorization: token
+        }
+      })
   }
 
 }

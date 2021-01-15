@@ -1,0 +1,29 @@
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Mã biên bảng</th>
+      <th>Mã công an</th>
+      <th>Tên công an</th>
+      <th>Tên khách hàng</th>
+      <th>Lỗi vi phạm</th>
+      <th>Giá phạt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of reports">
+      <td>
+        <span class="custom-checkbox">
+          <input type="checkbox" id="checkbox1" name="options[]" value="1" />
+          <label for="checkbox1"></label>
+        </span>
+      </td>
+      <td>{{ item.mA_BIEN_BANG }}</td>
+      <td>{{ item.mA_SO_CONG_AN }}</td>
+      <td>{{ item.teN_CONG_AN }}</td>
+      <td>{{ item.teN_KHACH_HANG }}</td>
+      <td>{{ item.loI_VI_PHAM }}</td>
+      <td>{{ item.giA_PHAT }}</td>
+    </tr>
+  </tbody>
+</table>

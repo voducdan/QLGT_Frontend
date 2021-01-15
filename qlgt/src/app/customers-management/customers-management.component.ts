@@ -35,7 +35,7 @@ export class CustomersManagementComponent implements OnInit {
       this.router.navigateByUrl('/login').then(() => {
       })
     }
-    // this.getUsers(1);
+    this.getUsers(1);
   }
 
   getUsers(pageIndex: number) {
