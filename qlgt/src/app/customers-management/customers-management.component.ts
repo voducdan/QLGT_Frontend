@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { getAttrsForDirectiveMatching } from '@angular/compiler/src/render3/view/util';
 import { Component, getModuleFactory, OnInit } from '@angular/core';
 declare var $: any;
-
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-customers-management',
   templateUrl: './customers-management.component.html',
@@ -27,11 +27,15 @@ export class CustomersManagementComponent implements OnInit {
 
   isAdded: Boolean = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     // Make the HTTP request:
-    this.getUsers(1);
+    if (!localStorage.getItem('token')) {
+      this.router.navigateByUrl('/login').then(() => {
+      })
+    }
+    // this.getUsers(1);
   }
 
   getUsers(pageIndex: number) {

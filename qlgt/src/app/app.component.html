@@ -1,7 +1,7 @@
-<app-header></app-header>
-<div style="display: flex;">
-      <app-sidebar></app-sidebar>
-      <router-outlet></router-outlet>
+<app-header *ngIf="isLogin"></app-header>
+<div style="display: flex">
+  <app-sidebar *ngIf="isLogin"></app-sidebar>
+  <router-outlet></router-outlet>
 </div>
 
-<app-footer></app-footer>
+<app-footer *ngIf="isLogin"></app-footer>
