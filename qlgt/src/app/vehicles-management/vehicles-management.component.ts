@@ -53,6 +53,8 @@ export class VehiclesManagementComponent implements OnInit {
   }
 
   updateVehicle(selectedVehicle: any) {
+    delete selectedVehicle.teN_KHACH_HANG;
+    delete selectedVehicle.teN_LOAI_PHUONG_TIEN;
     this.http.put<any>('http://localhost:52060/api/vehicles/', selectedVehicle)
       .subscribe(res => {
         console.log(res);
