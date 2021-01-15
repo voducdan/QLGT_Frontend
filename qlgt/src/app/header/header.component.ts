@@ -17,10 +17,5 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  getUserInfo(): Observable<any> {
-
-    return this.http
-      .post("http://localhost:52060/api/auth/login", this.httpOptions)
-  }
 
 }
