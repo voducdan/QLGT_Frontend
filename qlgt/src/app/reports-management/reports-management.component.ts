@@ -3,12 +3,12 @@ import { HttpClient } from '@angular/common/http';
 declare var $: any;
 
 @Component({
-  selector: 'app-vehicles-management',
-  templateUrl: './vehicles-management.component.html',
-  styleUrls: ['./vehicles-management.component.css']
+  selector: 'app-reports-management',
+  templateUrl: './reports-management.component.html',
+  styleUrls: ['./reports-management.component.css']
 })
-export class VehiclesManagementComponent implements OnInit {
-  vehiclesInfo: any = {
+export class ReportsManagementComponent implements OnInit {
+  reportsInfo: any = {
     data: {
       data: [],
       prePage: {},
@@ -16,34 +16,45 @@ export class VehiclesManagementComponent implements OnInit {
       currPage: {}
     }
   };
-  selectedVehicle: any = {};
-  newVehicle: any = {};
-  vehicleInfoUpdate: any = {};
+  selectedReport: any = {};
+  newReport: any = {};
+  reportInfoUpdate: any = {};
   successAction: any = {
     success: ""
   };
 
-  vehiclesType: any = {};
+  reportsType: any ={
+    data: []
+  };
+
   isAdded: Boolean = false;
 
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     // Make the HTTP request:
-    this.getVehicles(1);
-    this.getVehiclesType();
+    this.getUsers(1);
+    this.getReportType();
   }
 
-  getVehicles(pageIndex: number) {
-    this.http.get('http://localhost:52060/api/vehicles?PageIndex=' + pageIndex).subscribe(data => {
+  getUsers(pageIndex: number) {
+    this.http.get('http://localhost:52060/api/report?pageIndex=' + pageIndex).subscribe(users => {
       // Read the result field from the JSON response.
-      console.log(data);
-      this.vehiclesInfo = data;
+      console.log(users);
+      this.reportsInfo = users;
     });
   }
 
-  addVehicle(newVehicle: any) {
-    this.http.post<any>('http://localhost:52060/api/vehicles/', newVehicle).subscribe(res => {
+  getReportType() {
+    this.http.get('http://localhost:52060/api/reports/reporttype').subscribe(data => {
+      // Read the result field from the JSON response.
+      console.log(data);
+      this.reportsType = data;
+    });
+  }
+
+  addReport(newReport: any) {
+    this.http.post<any>('http://localhost:52060/api/report/', newReport).subscribe(res => {
       console.log(res);
       if (res.success)
         this.showSuccess();
@@ -52,8 +63,8 @@ export class VehiclesManagementComponent implements OnInit {
     })
   }
 
-  updateVehicle(selectedVehicle: any) {
-    this.http.put<any>('http://localhost:52060/api/vehicles/', selectedVehicle)
+  updateUser(selectedUser: any) {
+    this.http.put<any>('http://localhost:52060/api/report/', selectedUser)
       .subscribe(res => {
         console.log(res);
         if (res.success)
@@ -64,8 +75,8 @@ export class VehiclesManagementComponent implements OnInit {
       );
   }
 
-  deleteVehicle(selectedVehicle: number) {
-    this.http.delete('http://localhost:52060/api/vehicles/'+selectedVehicle)
+  deleteReport(seletedReport: number) {
+    this.http.delete('http://localhost:52060/api/report/'+seletedReport)
       .subscribe((status:any) => {
         console.log(status);
         if (status.success)
@@ -75,20 +86,20 @@ export class VehiclesManagementComponent implements OnInit {
       });
   }
 
-  
   showSuccess() {
     $('.alert-success').css('display', 'block');
     setTimeout(() => {
       $('.exit').click();
       $('.alert-success').css('display', 'none');
-      this.getVehicles(1);
-      this.newVehicle = "";
+      this.getUsers(1);
+      this.newReport = "";
     }, 1000);
 
   }
 
   showError() {
     $('.alert-danger').css('display', 'block');
+    this.newReport = "";
   }
 
   resetAlertDialog() {
@@ -96,15 +107,7 @@ export class VehiclesManagementComponent implements OnInit {
     $('.alert-success').css('display', 'none');
   }
 
-  getSelected(vehicle: any) {
-    this.selectedVehicle = Object.assign({}, vehicle);
-  }
-
-  getVehiclesType() {
-    this.http.get('http://localhost:52060/api/vehicles/vehicletypes').subscribe(data => {
-      // Read the result field from the JSON response.
-      console.log(data);
-      this.vehiclesType = data;
-    });
+  getSelected(user: any) {
+    this.selectedReport = Object.assign({}, user);
   }
 }
