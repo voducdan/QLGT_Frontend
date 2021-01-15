@@ -1,0 +1,29 @@
+<div class="row ml-5 d-flex flex-column" style="width: 700px; height: 500px">
+  <div style="display: inline-block" id="month-revenue">
+    <canvas
+      width="600px"
+      height="500px"
+      baseChart
+      [datasets]="bienBangData"
+      [labels]="bienBangLabel"
+      [colors]="lineChartColors"
+      [legend]="lineChartLegend"
+      [chartType]="lineChartType"
+      [options]="chartOptions"
+      [plugins]="lineChartPlugins"
+    >
+    </canvas>
+  </div>
+  <div class="col-lg-4 col-sm-5">
+    <app-angular2csv
+      [data]="exportData"
+      filename="Danh_Sach_Loi_Vi_Pham"
+      [options]="options"
+    >
+      <div class="btn user-to-csv">
+        Export to CSV
+        <i class="fas fa-download"></i>
+      </div>
+    </app-angular2csv>
+  </div>
+</div>
