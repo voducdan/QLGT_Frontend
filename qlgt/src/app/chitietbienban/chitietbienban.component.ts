@@ -16,7 +16,7 @@ export class ChitietbienbanComponent implements OnInit {
   constructor(private http: HttpClient, private route: ActivatedRoute) { }
   reports: any = []
   ngOnInit(): void {
-    let id: number = this.route.snapshot.paramMap.get('id');
+    let id: any = this.route.snapshot.paramMap.get('id')
     this.getData(id).subscribe(res => {
       this.reports = res.data
     })
