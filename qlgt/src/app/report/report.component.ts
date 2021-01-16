@@ -6,8 +6,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Color, Label } from 'ng2-charts';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { isNgTemplate } from '@angular/compiler';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 
 @Component({
   selector: 'app-report',
@@ -30,6 +29,8 @@ export class ReportComponent implements OnInit {
     title: 'DANH SACH LOI VI PHAM',
     removeNewLines: true,
     useBom: true,
+    filename: 'DANH SACH LOI VI PHAM',
+    keys: ['LOI VI PHAM']
   };
   public bienBangData: ChartDataSets[] = [
     {
@@ -72,8 +73,8 @@ export class ReportComponent implements OnInit {
     },
   ];
   public lineChartLegend = true;
-  public lineChartType = 'line';
-  public barChartType = 'bar';
+  public lineChartType: ChartType = 'line';
+  public barChartType: ChartType = 'bar';
   public lineChartPlugins = [];
 
   ngOnInit(): void {
