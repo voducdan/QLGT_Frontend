@@ -8,5 +8,5 @@
 	 - 1712319 - Trương Thành Danh
 	 - 1712339 - Vũ Văn Đạt
 ### Danh sách thành viên tham gia (Frond End)
-	 - 1712317 - Võ Đức Dân 
-   - 1712319 - Trương Thành Danh
+	 - 1712317 - Võ Đức Dân
+	 - 1712319 - Trương Thành Danh
